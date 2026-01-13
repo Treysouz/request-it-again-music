@@ -11,9 +11,5 @@ export default defineConfig({
     command: "npm run dev",
     url: "http://localhost:3000",
     reuseExistingServer: !process.env.CI,
-    env: {
-      // Disable Supabase calls during e2e tests
-      E2E_TEST: "true",
-    },
   },
 });
