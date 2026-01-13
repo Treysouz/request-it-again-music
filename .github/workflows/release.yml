@@ -77,8 +77,14 @@ jobs:
             echo "release-url=" >> $GITHUB_OUTPUT
           else
             echo "🚀 Running semantic-release..."
-            
-            npx --package semantic-release --package @semantic-release/changelog --package @semantic-release/git semantic-release
+
+            # Capture both output and exit code
+            set +e  # Temporarily disable exit on error
+            OUTPUT=$(npx --package semantic-release --package @semantic-release/changelog --package @semantic-release/git semantic-release 2>&1)
+            EXIT_CODE=$?
+            set -e  # Re-enable exit on error
+
+            echo "$OUTPUT"
 
             # Check if a release was created
             if echo "$OUTPUT" | grep -q "Published release"; then
