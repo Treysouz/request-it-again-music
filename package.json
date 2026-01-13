@@ -1,0 +1,40 @@
+{
+  "name": "request-it-again-music",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "prepare": "husky",
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "e2e": "playwright test",
+    "e2e:ui": "npx playwright test --ui"
+  },
+  "dependencies": {
+    "motion": "^12.24.12",
+    "next": "16.1.1",
+    "react": "19.2.3",
+    "react-dom": "19.2.3"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^20.3.1",
+    "@commitlint/config-conventional": "^20.3.1",
+    "@playwright/test": "^1.57.0",
+    "@tailwindcss/postcss": "^4",
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/react": "^16.3.1",
+    "@types/node": "^20",
+    "@types/react": "^19.2.8",
+    "@types/react-dom": "^19.2.3",
+    "eslint": "^9",
+    "eslint-config-next": "16.1.1",
+    "husky": "^9.1.7",
+    "jest": "^30.2.0",
+    "prettier": "3.7.4",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}

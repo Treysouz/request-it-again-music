@@ -1,0 +1,59 @@
+name: 🚢 Deploy Production
+
+permissions:
+  contents: write
+  issues: read
+  pull-requests: write
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: production-deploy
+  cancel-in-progress: false
+
+jobs:
+  test:
+    name: Run Tests
+    uses: ./.github/workflows/testing.yml
+    secrets: inherit
+
+  release:
+    name: Create Release
+    needs: test
+    if: needs.test.result == 'success'
+    uses: ./.github/workflows/release.yml
+    secrets: inherit
+
+  deploy:
+    name: Deploy Production
+    needs: [test, release]
+    if: |
+      needs.release.outputs.released == 'true'
+    uses: ./.github/workflows/deploy.yml
+    with:
+      environment: "Production"
+      production: true
+    secrets: inherit
+
+  summary:
+    name: Production Summary
+    runs-on: ubuntu-latest
+    needs: [test, release, deploy]
+    if: needs.deploy.result == 'success'
+    steps:
+      - name: Production Deployment Summary
+        run: |
+          # Create GitHub workflow summary
+          cat >> $GITHUB_STEP_SUMMARY << EOF
+          ## 🚢 Production Deployment Successful!
+
+          | Item | Details |
+          |------|---------|
+          | 🔗 **Deployment URL** | [${{ needs.deploy.outputs.deployment-url }}](${{ needs.deploy.outputs.deployment-url }}) |
+          | 🏷️ **Version** | \`${{ needs.release.outputs.version }}\` |
+          | 🔀 **Branch** | \`${{ github.ref }}\` |
+
+          EOF
