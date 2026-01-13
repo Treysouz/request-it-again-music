@@ -1,0 +1,8 @@
+# Validate commit message using commitlint
+# Supports both conventional commits and JIRA integration
+# Examples:
+#   - feat: [TSPS-123] add user authentication
+#   - fix: [TSPS-456] resolve login bug
+#   - docs: update API documentation
+
+npx --no-install commitlint --edit $1

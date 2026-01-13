@@ -1,0 +1,12 @@
+#!/bin/sh
+# Auto-fix formatting issues
+npm run format
+
+# Run linting checks
+npm run lint
+
+# Run unit tests
+npm run test
+
+# Run e2e tests
+npm run e2e

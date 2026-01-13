@@ -1,0 +1,124 @@
+name: 🏷️ Release
+
+permissions:
+  contents: write
+  issues: read
+
+on:
+  workflow_call:
+    inputs:
+      dry-run:
+        description: "Run in dry-run mode (no actual release)"
+        required: false
+        default: false
+        type: boolean
+    outputs:
+      released:
+        description: "Whether a new release was created"
+        value: ${{ jobs.release.outputs.released }}
+      version:
+        description: "The version that was released"
+        value: ${{ jobs.release.outputs.version }}
+      release-url:
+        description: "URL of the GitHub release"
+        value: ${{ jobs.release.outputs.release-url }}
+
+jobs:
+  release:
+    name: Create Release
+    runs-on: ubuntu-latest
+    outputs:
+      released: ${{ steps.release.outputs.released }}
+      version: ${{ steps.release.outputs.version }}
+      release-url: ${{ steps.release.outputs.release-url }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: "npm"
+
+      - name: Cache node_modules
+        id: cache
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: npm ci
+
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Run Semantic Release
+        id: release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          npx semantic-release 
+          if [ "${{ inputs.dry-run }}" = "true" ]; then
+            echo "🧪 Running semantic-release in dry-run mode..."
+            ./node_modules/.bin/semantic-release --dry-run
+            echo "released=false" >> $GITHUB_OUTPUT
+            echo "version=dry-run" >> $GITHUB_OUTPUT
+            echo "release-url=" >> $GITHUB_OUTPUT
+          else
+            echo "🚀 Running semantic-release..."
+
+            # Run semantic-release with better error handling
+            set +e  # Don't exit on error immediately
+            OUTPUT=$(./node_modules/.bin/semantic-release --no-ci 2>&1)
+            EXIT_CODE=$?
+            set -e  # Re-enable exit on error
+
+            echo "📋 Semantic Release Output:"
+            echo "$OUTPUT"
+            echo "📊 Exit Code: $EXIT_CODE"
+
+            # Check if a release was created
+            if echo "$OUTPUT" | grep -q "Published release"; then
+              VERSION=$(node -p "require('./package.json').version")
+              echo "released=true" >> $GITHUB_OUTPUT
+              echo "version=$VERSION" >> $GITHUB_OUTPUT
+              echo "release-url=https://github.com/${{ github.repository }}/releases/tag/v$VERSION" >> $GITHUB_OUTPUT
+              echo "✅ Released version $VERSION"
+            elif echo "$OUTPUT" | grep -qi "no release\|branch.*is behind\|branch is up to date"; then
+              echo "released=false" >> $GITHUB_OUTPUT
+              echo "version=" >> $GITHUB_OUTPUT
+              echo "release-url=" >> $GITHUB_OUTPUT
+              echo "ℹ️ No release created (no releasable changes or branch not ahead)"
+            else
+              # Semantic release failed or had an unexpected outcome
+              echo "released=false" >> $GITHUB_OUTPUT
+              echo "version=" >> $GITHUB_OUTPUT
+              echo "release-url=" >> $GITHUB_OUTPUT
+              echo "❌ Semantic release failed with exit code $EXIT_CODE"
+              echo "🔍 Check the output above for details"
+
+              # Fail the pipeline if exit code is non-zero
+              if [ $EXIT_CODE -ne 0 ]; then
+                exit $EXIT_CODE
+              fi
+            fi
+          fi
+
+      - name: Release Summary
+        if: always()
+        run: |
+          echo "🏷️ Released: ${{ steps.release.outputs.released }}"
+          echo "📦 Version: ${{ steps.release.outputs.version }}"
+          echo "🔗 Release URL: ${{ steps.release.outputs.release-url }}"
+          echo "🧪 Dry Run: ${{ inputs.dry-run }}"
