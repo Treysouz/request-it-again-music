@@ -68,25 +68,17 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          npx semantic-release 
+
           if [ "${{ inputs.dry-run }}" = "true" ]; then
             echo "🧪 Running semantic-release in dry-run mode..."
-            ./node_modules/.bin/semantic-release --dry-run
+            npx --package semantic-release --package @semantic-release/changelog --package @semantic-release/git semantic-release --dry-run
             echo "released=false" >> $GITHUB_OUTPUT
             echo "version=dry-run" >> $GITHUB_OUTPUT
             echo "release-url=" >> $GITHUB_OUTPUT
           else
             echo "🚀 Running semantic-release..."
-
-            # Run semantic-release with better error handling
-            set +e  # Don't exit on error immediately
-            OUTPUT=$(./node_modules/.bin/semantic-release --no-ci 2>&1)
-            EXIT_CODE=$?
-            set -e  # Re-enable exit on error
-
-            echo "📋 Semantic Release Output:"
-            echo "$OUTPUT"
-            echo "📊 Exit Code: $EXIT_CODE"
+            
+            npx --package semantic-release --package @semantic-release/changelog --package @semantic-release/git semantic-release
 
             # Check if a release was created
             if echo "$OUTPUT" | grep -q "Published release"; then
