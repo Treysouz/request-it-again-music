@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/Treysouz/request-it-again-music/compare/v1.0.0...v1.1.0) (2026-01-13)
+
+
+### Features
+
+* [REQ-1] - Github Workflow now considers if a failed pipeline if semantic release fails ([4196924](https://github.com/Treysouz/request-it-again-music/commit/4196924531addf8277670e5696ef956e8b66135f))
+
 # 1.0.0 (2026-01-13)
 
 
