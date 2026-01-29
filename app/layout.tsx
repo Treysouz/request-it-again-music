@@ -1,16 +1,9 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Bebas_Neue, Roboto } from "next/font/google";
+import { Nav } from "@/components";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+const ROBOTO = Roboto();
 
 export const metadata: Metadata = {
   title: "Request It Again Music",
@@ -23,11 +16,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" data-theme="request-it-again">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${ROBOTO.className} antialiased flex flex-row min-h-screen bg-white w-full`}
       >
-        {children}
+        <header>
+          <Nav></Nav>
+        </header>
+        <main className="shrink-0 h-full flex-1 bg-white">{children}</main>
       </body>
     </html>
   );
