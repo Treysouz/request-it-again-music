@@ -18,7 +18,7 @@ describe("Dropdown", () => {
     render(<Dropdown label="Navigation" toggle={mockToggle} menu={mockMenu} />);
 
     const summary = screen.getByLabelText(/Open Navigation Menu/i);
-    const details = screen.getByTestId("mobile-nav");
+    const details = screen.getByTestId("dropdown");
 
     expect(details).not.toHaveAttribute("open");
 
@@ -34,7 +34,7 @@ describe("Dropdown", () => {
       <Dropdown label="Navigation" toggle={mockToggle} menu={mockMenu} open />
     );
 
-    const details = screen.getByTestId("mobile-nav");
+    const details = screen.getByTestId("dropdown");
     expect(details).toHaveAttribute("open");
 
     // Click outside the dropdown
@@ -50,7 +50,7 @@ describe("Dropdown", () => {
       <Dropdown label="Navigation" toggle={mockToggle} menu={mockMenu} open />
     );
 
-    const details = screen.getByTestId("mobile-nav");
+    const details = screen.getByTestId("dropdown");
     expect(details).toHaveAttribute("open");
 
     // Click inside the dropdown
@@ -71,7 +71,7 @@ describe("Dropdown", () => {
       />
     );
 
-    const details = screen.getByTestId("mobile-nav");
+    const details = screen.getByTestId("dropdown");
     const summary = screen.getByLabelText(/Open Navigation Menu/i);
 
     // Click to trigger toggle
