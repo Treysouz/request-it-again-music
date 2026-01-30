@@ -17,7 +17,7 @@ describe("Dropdown", () => {
   it("should toggle open state when clicked", () => {
     render(<Dropdown label="Navigation" toggle={mockToggle} menu={mockMenu} />);
 
-    const summary = screen.getByLabelText(/Open Navigation Menu/i);
+    const summary = screen.getByLabelText(/Toggle Navigation Menu/i);
     const details = screen.getByTestId("dropdown");
 
     expect(details).not.toHaveAttribute("open");
@@ -72,7 +72,7 @@ describe("Dropdown", () => {
     );
 
     const details = screen.getByTestId("dropdown");
-    const summary = screen.getByLabelText(/Open Navigation Menu/i);
+    const summary = screen.getByLabelText(/Toggle Navigation Menu/i);
 
     // Click to trigger toggle
     fireEvent.click(summary);
