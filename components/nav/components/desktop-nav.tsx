@@ -1,4 +1,5 @@
-import { NavLogo, NavItem } from "./";
+import { NavLogo, NavList } from "./";
+
 import type { VariantNavProps } from "../nav.types";
 
 export default function DesktopNav({
@@ -10,23 +11,10 @@ export default function DesktopNav({
       <div className="p-8">
         <NavLogo></NavLogo>
       </div>
-      <ul className="text-2xl font-medium flex flex-col">
-        {navItemConfigs.map((item, index) => {
-          const isActive = activeSection
-            ? activeSection === item.sectionId
-            : false;
-          return (
-            <NavItem
-              key={index}
-              href={item.href}
-              target={item.isExternal ? "_target" : undefined}
-              isActive={isActive}
-            >
-              {item.text}
-            </NavItem>
-          );
-        })}
-      </ul>
+      <NavList
+        navItemConfigs={navItemConfigs}
+        activeSection={activeSection}
+      ></NavList>
     </div>
   );
 }

@@ -8,6 +8,8 @@ export interface NavItemConfig {
   sectionId?: string;
   /**Whether it's an external link */
   isExternal?: boolean;
+  /**Nested links */
+  nestedLinks?: NavItemConfig[];
 }
 
 /** Desktop and mobile nav props */

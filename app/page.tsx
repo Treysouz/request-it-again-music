@@ -1,9 +1,8 @@
 import {
-  AboutSection,
   ContactSection,
-  EventsSection,
+  RecentEventsSection,
   HeroSection,
-  ReleasesSection,
+  LatestReleasesSection,
   RosterSection,
 } from "./_sections";
 
@@ -11,10 +10,9 @@ export default function Home() {
   return (
     <>
       <HeroSection></HeroSection>
-      <ReleasesSection></ReleasesSection>
-      <AboutSection></AboutSection>
+      <LatestReleasesSection></LatestReleasesSection>
       <RosterSection></RosterSection>
-      <EventsSection></EventsSection>
+      <RecentEventsSection></RecentEventsSection>
       <ContactSection></ContactSection>
     </>
   );

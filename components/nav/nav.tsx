@@ -17,26 +17,37 @@ export default function Nav() {
       text: "Home",
       href: "/",
       sectionId: "hero",
+      nestedLinks: [
+        {
+          text: "Latest Releases",
+          href: "/#latest-releases",
+          sectionId: "latest-releases",
+        },
+        {
+          text: "Recent Events",
+          href: "/#recent-events",
+          sectionId: "recent-events",
+        },
+        {
+          text: "Roster",
+          href: "/#roster",
+          sectionId: "roster",
+        },
+        {
+          text: "About Us",
+          href: "/#about",
+          sectionId: "about",
+        },
+      ],
     },
     {
       text: "Releases",
-      href: "/#releases",
+      href: "/releases",
       sectionId: "releases",
     },
     {
-      text: "About Us",
-      href: "/#about",
-      sectionId: "about",
-    },
-    {
-      text: "Roster",
-      href: "/#roster",
-      sectionId: "roster",
-    },
-
-    {
       text: "Events",
-      href: "/#events",
+      href: "/events",
       sectionId: "events",
     },
     {

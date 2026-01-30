@@ -8,7 +8,7 @@ const BEBAS_NEUE = Bebas_Neue({ weight: "400" });
 export default function NavLogo() {
   return (
     <Link
-      className="flex flex-row lg:flex-col items-center justify-center space-x-2 sm:space-x-4 flex-wrap"
+      className="flex flex-row lg:flex-col items-center justify-center space-x-2 sm:space-x-4 "
       href="/"
       target="_parent"
     >

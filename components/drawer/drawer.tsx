@@ -15,6 +15,7 @@ interface DrawerProps {
 
 export interface DrawerRef {
   toggleDrawer: () => unknown;
+  closeDrawer: () => unknown;
 }
 
 export default function Drawer({
@@ -27,12 +28,17 @@ export default function Drawer({
 
   /**Toggles drawer */
   const toggleDrawer = () => {
-    console.log("toggling");
     setOpen((prev) => !prev);
+  };
+
+  /**Closes drawer */
+  const closeDrawer = () => {
+    setOpen(false);
   };
 
   useImperativeHandle(ref, () => ({
     toggleDrawer,
+    closeDrawer,
   }));
 
   return (

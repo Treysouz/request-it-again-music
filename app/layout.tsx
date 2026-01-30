@@ -23,7 +23,7 @@ export default function RootLayout({
       data-scroll-behavior="smooth"
     >
       <body
-        className={`${ROBOTO.className} antialiased flex flex-col lg:flex-row min-h-screen bg-white w-full overflow-auto`}
+        className={`${ROBOTO.className} antialiased flex flex-col lg:flex-row min-h-screen bg-white w-full overflow-auto min-w-75`}
       >
         <header className="z-100 fixed lg:sticky top-0 lg:h-dvh w-full lg:w-min">
           <Nav></Nav>
