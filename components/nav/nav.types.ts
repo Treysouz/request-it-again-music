@@ -9,3 +9,11 @@ export interface NavItemConfig {
   /**Whether it's an external link */
   isExternal?: boolean;
 }
+
+/** Desktop and mobile nav props */
+export interface VariantNavProps {
+  /** Details for the nav items */
+  navItemConfigs: NavItemConfig[];
+  /** The section of the page currently in view. */
+  activeSection?: string;
+}

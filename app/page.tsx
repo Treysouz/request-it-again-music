@@ -1,3 +1,21 @@
+import {
+  AboutSection,
+  ContactSection,
+  EventsSection,
+  HeroSection,
+  ReleasesSection,
+  RosterSection,
+} from "./_sections";
+
 export default function Home() {
-  return <div className="h-full">Section</div>;
+  return (
+    <>
+      <HeroSection></HeroSection>
+      <ReleasesSection></ReleasesSection>
+      <AboutSection></AboutSection>
+      <RosterSection></RosterSection>
+      <EventsSection></EventsSection>
+      <ContactSection></ContactSection>
+    </>
+  );
 }

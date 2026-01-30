@@ -1,4 +1,9 @@
 @import "tailwindcss";
+
+@theme {
+  --color-urban-dark: #121212;
+}
+
 @plugin "daisyui";
 
 :root {

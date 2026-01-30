@@ -21,9 +21,14 @@ export default function NavItem({
   return (
     <Link
       {...props}
-      className={`btn btn-ghost rounded-none flex justify-start hover:bg-secondary hover:text-white py-6 text-xl border-x-0 ${isActive ? "border-primary" : ""} ${className || ""} `}
+      className={`btn btn-ghost rounded-none flex justify-start hover:bg-secondary hover:text-white p-0 h-12 text-xl border-none  ${isActive ? "bg-secondary text-white" : ""} ${className || ""} `}
     >
-      {children}
+      <div className="flex flex-row items-center h-full space-x-7 w-full">
+        <div
+          className={`h-full ${isActive ? "bg-primary" : "bg-transparent"} w-1`}
+        />
+        <div>{children}</div>
+      </div>
     </Link>
   );
 }

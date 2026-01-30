@@ -1,20 +1,13 @@
 import { NavLogo, NavItem } from "./";
-import { NavItemConfig } from "../nav.types";
-
-interface DesktopNavProps {
-  /** Details for the nav items */
-  navItemConfigs: NavItemConfig[];
-  /** The section of the page currently in view. */
-  activeSection?: string;
-}
+import type { VariantNavProps } from "../nav.types";
 
 export default function DesktopNav({
   navItemConfigs,
   activeSection,
-}: DesktopNavProps) {
+}: VariantNavProps) {
   return (
-    <div className="flex flex-col  h-full bg-white shadow-md">
-      <div className="p-4">
+    <div className="flex-col h-full bg-white shadow-lg hidden lg:flex">
+      <div className="p-8">
         <NavLogo></NavLogo>
       </div>
       <ul className="text-2xl font-medium flex flex-col">

@@ -1,6 +1,6 @@
 "use client";
 
-import { DesktopNav } from "./components";
+import { DesktopNav, MobileNav } from "./components";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import type { NavItemConfig } from "./nav.types";
@@ -16,7 +16,7 @@ export default function Nav() {
     {
       text: "Home",
       href: "/",
-      sectionId: "home",
+      sectionId: "hero",
     },
     {
       text: "Releases",
@@ -24,29 +24,36 @@ export default function Nav() {
       sectionId: "releases",
     },
     {
+      text: "About Us",
+      href: "/#about",
+      sectionId: "about",
+    },
+    {
       text: "Roster",
       href: "/#roster",
       sectionId: "roster",
     },
-    {
-      text: "Live Stream",
-      href: "https://www.twitch.tv/stephensouzamusic",
-      isExternal: true,
-    },
+
     {
       text: "Events",
       href: "/#events",
       sectionId: "events",
     },
     {
-      text: "Merch",
-      href: "/#merch",
-      isExternal: true,
-    },
-    {
       text: "Contact",
       href: "/#contact",
       sectionId: "contact",
+    },
+
+    {
+      text: "Merch",
+      href: "https://cooyah.com/",
+      isExternal: true,
+    },
+    {
+      text: "Live Stream",
+      href: "https://www.twitch.tv/stephensouzamusic",
+      isExternal: true,
     },
   ];
 
@@ -92,14 +99,16 @@ export default function Nav() {
     };
   }, [pathname]);
 
-  useEffect(() => {
-    console.log(activeSection);
-  }, [activeSection]);
-
   return (
-    <DesktopNav
-      navItemConfigs={NAV_ITEMS}
-      activeSection={activeSection}
-    ></DesktopNav>
+    <>
+      <DesktopNav
+        navItemConfigs={NAV_ITEMS}
+        activeSection={activeSection}
+      ></DesktopNav>
+      <MobileNav
+        navItemConfigs={NAV_ITEMS}
+        activeSection={activeSection}
+      ></MobileNav>
+    </>
   );
 }

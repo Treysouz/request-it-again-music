@@ -1,19 +1,45 @@
-import { ToggleContent, NavLogo } from "./";
-import { Drawer } from "@/components";
+import { ToggleContent, NavLogo, NavItem } from "./";
+import { Drawer, type DrawerRef } from "@/components";
+import { useRef } from "react";
+import type { VariantNavProps } from "../nav.types";
 
-export default function MobileNav() {
+export default function MobileNav({
+  navItemConfigs,
+  activeSection,
+}: VariantNavProps) {
+  const drawerRef = useRef<DrawerRef>(null);
+
+  const toggleNavDrawer = () => {
+    drawerRef.current?.toggleDrawer();
+  };
+
   return (
-    <div className="w-full grid grid-cols-3 p-8">
-      <div className="col-span-1">
-        <Drawer toggle={<ToggleContent />}>
-          <div className="bg-red-100 h-full w-60">
-            <button>Test</button>
-          </div>
-        </Drawer>
-      </div>
-      <div className="col-span-1 flex items-center justify-center">
-        <NavLogo></NavLogo>
-      </div>
+    <div className="w-full p-4 flex flex-row justify-between bg-white shadow-md flex-wrap">
+      <NavLogo></NavLogo>
+      <Drawer ref={drawerRef} toggle={<ToggleContent />} side="r">
+        <div className="bg-white h-full py-8">
+          <ul className="text-2xl font-medium flex flex-col">
+            {navItemConfigs.map((item, index) => {
+              const isActive = activeSection
+                ? activeSection === item.sectionId
+                : false;
+
+              return (
+                <NavItem
+                  key={index}
+                  href={item.href}
+                  target={item.isExternal ? "_target" : undefined}
+                  isActive={isActive}
+                  className="pr-16"
+                  onClick={toggleNavDrawer}
+                >
+                  {item.text}
+                </NavItem>
+              );
+            })}
+          </ul>
+        </div>
+      </Drawer>
     </div>
   );
 }
