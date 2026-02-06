@@ -1,3 +1,19 @@
+# [1.2.0](https://github.com/Treysouz/request-it-again-music/compare/v1.1.0...v1.2.0) (2026-02-06)
+
+
+### Bug Fixes
+
+* [REQ-2] - Fixed unit test ([ac1ad1d](https://github.com/Treysouz/request-it-again-music/commit/ac1ad1df2626adf7775f098ae1bc2a0b20dbaca4))
+* [REQ-2] - Fixed unit test ([70b441a](https://github.com/Treysouz/request-it-again-music/commit/70b441afa9eacf8a40782b1966c2d2f2c2dac5a3))
+
+
+### Features
+
+* [REQ-2] - Added both mobile and desktop navs.  Added placeholders for sections. ([df47a19](https://github.com/Treysouz/request-it-again-music/commit/df47a19b801e47ccda9af1232eadd181f6566ff2))
+* [REQ-2] - Adjusted sizing of mobile nav content ([ab74e2f](https://github.com/Treysouz/request-it-again-music/commit/ab74e2f471137d50e41bd57b6259063be35b0f8f))
+* [REQ-2] - Made nav bar more responsive ([0354598](https://github.com/Treysouz/request-it-again-music/commit/03545980b0a0f87639311177469cdd9951d4e375))
+* [REQ-2] - Started Desktop Nav ([e71e0a8](https://github.com/Treysouz/request-it-again-music/commit/e71e0a84a8385f1eae9fcd7eead31024083a106e))
+
 # [1.1.0](https://github.com/Treysouz/request-it-again-music/compare/v1.0.0...v1.1.0) (2026-01-13)
 
 
