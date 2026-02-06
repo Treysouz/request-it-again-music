@@ -111,7 +111,7 @@ export default function Nav() {
   }, [pathname]);
 
   return (
-    <>
+    <nav className="h-full">
       <DesktopNav
         navItemConfigs={NAV_ITEMS}
         activeSection={activeSection}
@@ -120,6 +120,6 @@ export default function Nav() {
         navItemConfigs={NAV_ITEMS}
         activeSection={activeSection}
       ></MobileNav>
-    </>
+    </nav>
   );
 }

@@ -7,14 +7,16 @@ export default function DesktopNav({
   activeSection,
 }: VariantNavProps) {
   return (
-    <div className="flex-col h-full bg-white shadow-lg hidden lg:flex">
-      <div className="p-8">
+    <div className="flex-col h-full shadow-lg hidden lg:flex bg-secondary">
+      <div className="p-8 bg-white">
         <NavLogo></NavLogo>
       </div>
-      <NavList
-        navItemConfigs={navItemConfigs}
-        activeSection={activeSection}
-      ></NavList>
+      <div className="bg-white">
+        <NavList
+          navItemConfigs={navItemConfigs}
+          activeSection={activeSection}
+        ></NavList>
+      </div>
     </div>
   );
 }

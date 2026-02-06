@@ -27,7 +27,7 @@ export default function MobileNav({
   }, [pathname, drawerRef]);
 
   return (
-    <div className="w-full p-4 bg-white shadow-md grid grid-cols-2 md:grid-cols-3">
+    <div className="w-full p-4 bg-white shadow-md lg:hidden grid-cols-2 md:grid-cols-3">
       <div className="col-span-1 flex items-center">
         <Drawer ref={drawerRef} toggle={<DrawerToggle />}>
           <div className="bg-white h-full py-8 w-36 sm:w-50">

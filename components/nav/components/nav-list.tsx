@@ -74,7 +74,7 @@ export default function NavList({
               href={item.href}
               target={item.isExternal ? "_target" : undefined}
               isActive={isActive}
-              className="h-12 flex-1 text-sm! sm:text-lg"
+              className="h-12 flex-1 sm:text-lg"
             >
               {item.text}
             </NavItem>

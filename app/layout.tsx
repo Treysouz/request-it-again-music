@@ -28,7 +28,9 @@ export default function RootLayout({
         <header className="z-100 fixed lg:sticky top-0 lg:h-dvh w-full lg:w-min">
           <Nav></Nav>
         </header>
-        <main className="shrink-0 h-full flex-1 bg-white">{children}</main>
+        <main className="shrink-0 h-full flex-1 bg-white overflow-hidden">
+          {children}
+        </main>
       </body>
     </html>
   );

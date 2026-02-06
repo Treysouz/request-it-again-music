@@ -2,6 +2,7 @@
 
 @theme {
   --color-urban-dark: #121212;
+  --color-link: #001cf2;
 }
 
 @plugin "daisyui";
